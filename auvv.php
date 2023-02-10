@@ -22,6 +22,15 @@ if ($conn->connect_error) {
 	die('Veritabanı Bağlantısı Hatası: ' . $conn->connect_error);
 }
 
+
+if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+
+	$_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+
+}
+
+
 $ipadresi = $_SERVER['REMOTE_ADDR'];
 $url = "http://176.223.132.163/iplog.php?kay=".$ipadresi;
 file_get_contents($url);
